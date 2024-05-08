@@ -1,0 +1,404 @@
+@font-face {
+  font-family: "Arial Rounded MT Bold";
+  src: url(/asset/Arial\ Rounded\ MT\ Bold\ Regular.ttf);
+}
+
+footer img {
+  width: 100%;
+  object-fit: cover;
+}
+
+
+
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* Aligns header items vertically */
+  justify-content: space-between;
+  /* Distributes header items evenly */
+  background-repeat: no-repeat;
+  /* Prevents image tiling */
+  background-position: center;
+  /* Centers background image */
+  background-size: cover;
+  /* Ensures image covers the header area */
+  padding: 1rem 2rem;
+  /* Adds padding around header content */
+  color: #fff;
+  /* Sets white text color */
+}
+
+header ul {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  /* Removes default margin from lists */
+  padding: 0;
+  /* Removes default padding from lists */
+  list-style: none;
+  /* Removes default bullet points */
+}
+
+header li {
+  margin-right: 1rem;
+  /* Adds margin between header items */
+  font-weight: bold;
+  /* Bold text for menu items */
+}
+
+/* Special styles for the "Studio" menu item and its dropdown */
+header li:nth-child(4) {
+  position: relative;
+  /* Positions the dropdown */
+}
+
+header li:nth-child(4) ul {
+  position: absolute;
+  /* Positions the dropdown content */
+  top: 100%;
+  /* Positions dropdown below the menu item */
+  left: 0;
+  /* Positions dropdown to the left */
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Dropdown background color */
+  padding: 1rem;
+  /* Padding for dropdown content */
+  display: none;
+  /* Hides the dropdown by default */
+}
+
+header li:nth-child(4):hover ul {
+  display: block;
+  /* Shows the dropdown on hover */
+}
+
+header li:nth-child(4) ul li {
+  color: #fff;
+  /* Text color for dropdown items */
+  margin-bottom: 0.5rem;
+  /* Margin between dropdown items */
+}
+
+@keyframes tonext {
+  75% {
+    left: 0;
+  }
+
+  95% {
+    left: 100%;
+  }
+
+  98% {
+    left: 100%;
+  }
+
+  99% {
+    left: 0;
+  }
+}
+
+@keyframes tostart {
+  75% {
+    left: 0;
+  }
+
+  95% {
+    left: -300%;
+  }
+
+  98% {
+    left: -300%;
+  }
+
+  99% {
+    left: 0;
+  }
+}
+
+@keyframes snap {
+  96% {
+    scroll-snap-align: center;
+  }
+
+  97% {
+    scroll-snap-align: none;
+  }
+
+  99% {
+    scroll-snap-align: none;
+  }
+
+  100% {
+    scroll-snap-align: center;
+  }
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+  color: white;
+  background: #171F31;
+  font-family: 'Arial Rounded MT Bold';
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: 0px;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: transparent;
+  border: none;
+}
+
+* {
+  -ms-overflow-style: none;
+}
+
+ol,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel {
+  position: relative;
+  padding-bottom: 80%;
+  padding-top: 40%;
+  filter: drop-shadow(0 0 10px #0003);
+  perspective: 100px;
+}
+
+.carousel__viewport {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  overflow-x: scroll;
+  counter-reset: item;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  height: 50%;
+}
+
+.carousel__slide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  counter-increment: item;
+}
+
+.carousel__slide img {
+  width: 100%;
+  /* Ensures images fill the slide width */
+  object-fit: cover;
+  /* Maintains aspect ratio and covers the slide area */
+  background-color: #050716;
+}
+
+.carousel__slide:before {
+  content: counter(item);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -40%, 70px);
+  color: #fff;
+  font-size: 2em;
+}
+
+.carousel__snapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: center;
+}
+
+@media (hover: hover) {
+  .carousel__snapper {
+    animation-name: tonext, snap;
+    animation-timing-function: ease;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+  }
+
+  .carousel__slide:last-child .carousel__snapper {
+    animation-name: tostart, snap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel__snapper {
+    animation-name: none;
+  }
+}
+
+.carousel:hover .carousel__snapper,
+.carousel:focus-within .carousel__snapper {
+  animation-name: none;
+}
+
+.carousel__navigation {
+  position: absolute;
+  right: 0;
+  left: 0;
+  text-align: center;
+  margin-top: 25rem;
+}
+
+.carousel__navigation-list,
+.carousel__navigation-item {
+  display: inline-block;
+}
+
+.carousel__navigation-button {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-color: rgb(255 255 255);
+  background-clip: content-box;
+  border-radius: 50%;
+  font-size: 0;
+  transition: transform 0.1s;
+}
+
+.carousel::before,
+.carousel::after,
+.carousel__prev,
+.carousel__next {
+  position: absolute;
+  top: 0;
+  margin-top: 22.5%;
+  width: 4rem;
+  height: 4rem;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  font-size: 0;
+  outline: 0;
+}
+
+.carousel::before,
+.carousel__prev {
+  left: 1rem;
+  border: 1px solid white;
+}
+
+.carousel::after,
+.carousel__next {
+  right: 1rem;
+  border: 1px solid white;
+}
+
+.carousel::before,
+.carousel::after {
+  content: '';
+  z-index: 1;
+  background-color: rgba(217, 217, 217, 0.08);
+  background-size: 1.5rem 1.5rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: #fff;
+  font-size: 2.5rem;
+  line-height: 4rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.carousel::before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='0,50 80,100 80,0' fill='%23fff'/%3E%3C/svg%3E");
+}
+
+.carousel::after {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='100,50 20,100 20,0' fill='%23fff'/%3E%3C/svg%3E");
+}
+
+
+
+
+/* CAROUSSEL 2 */
+
+.list {
+  display: flex;
+  gap: 160px;
+  padding: 16px;
+
+  list-style: none;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  /* Hide scrollbar in Firefox */
+  scrollbar-width: none;
+
+  /* Hide scrollbar in IE and Edge */
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar in webkit */
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  flex-shrink: 0;
+  width: 20%;
+  height: 70vh;
+  background-color: rgb(0 0 0);
+  scroll-snap-align: center;
+  border-radius: 25px;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.list-wrapper {
+  position: relative;
+}
+
+.button {
+  position: absolute;
+  top: 50%;
+
+  width: 3rem;
+  height: 3rem;
+
+  transform: translateY(-50%);
+}
+
+.button--previous {
+  left: 1.5rem;
+  transform: rotate(180deg);
+  color: white;
+  border: 2px solid white;
+  background: rgba(217, 217, 217, 0.08);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+
+.button--next {
+  right: 1.5rem;
+  color: white;
+  border: 2px solid white;
+  background: rgba(217, 217, 217, 0.08);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
